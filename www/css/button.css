@@ -1,0 +1,22 @@
+img {
+    position: absolute;
+    /* Prevent border showing up after button is clicked */
+    border: none;
+}
+
+.flash_btn {
+    background-size: 50px 50px;
+    width: 50px;
+    height: 50px;
+    top: 20px;
+    right: 20px;
+}
+
+.snap_btn {
+    background-size: 60px 60px;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    left: 0px;  right: 0px;
+    margin: auto;
+}

@@ -1,0 +1,17 @@
+<div class="cameraPreview">
+
+    <!-- Rectangle centered vertically & horizontally -->
+    <div class="rectangle"></div>
+
+    <!-- Placed in top-right corner -->
+    <img class="flash_btn"
+        ng-init="flash_mode = off"
+        ng-click="changeFlashMode()"
+        ng-src="{{ flash_mode === true ? flash_on_icon : flash_off_icon }}">
+
+    <!-- Placed at the bottom -->
+    <img class="snap_btn"
+        ng-click="takePicture()"
+        ng-src="{{ take_pic_icon }}">
+
+</div>
