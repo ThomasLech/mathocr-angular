@@ -28,7 +28,8 @@ app
                 }
             })
             .state('resultsPanel', {
-                url: '/resultsPanel/:prediction',
+                url: '/resultsPanel',
+                params: {results: null},
                 templateUrl: 'templates/resultsPanel.html',
                 controller: 'resultsPanelCtrl',
                 resolve: {

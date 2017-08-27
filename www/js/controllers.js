@@ -1,6 +1,8 @@
 app
     .controller('cameraPreviewCtrl', ['$scope', '$state', '$document', '$http', 'pictureService', function($scope, $state, $document, $http, pictureService) {
 
+        $scope.flash_mode = CameraPreview.FLASH_MODE.OFF;
+
         // Absolute paths to icons
         $scope.flash_on_icon = 'img/flash_on.svg';
         $scope.flash_off_icon = 'img/flash_off.svg';
@@ -28,10 +30,9 @@ app
 
                             function successCallback(response) {
 
-                                var prediction = response.data;
-                                // Do sth with prediction
-
-                                $state.go('resultsPanel', {'prediction': prediction});
+                                var results = response.data;
+                                // Do sth with results
+                                $state.go('resultsPanel', {'results': results});
                             },
                             function errorCallback(error) {
                                 alert('status:' + error.status + '\nstatusText:' + error.statusText);
@@ -46,8 +47,13 @@ app
         };
 
         $scope.changeFlashMode = function() {
+
             // Trigger flash mode
-            $scope.flash_mode = !$scope.flash_mode;
+            if ($scope.flash_mode === CameraPreview.FLASH_MODE.OFF) {
+                $scope.flash_mode = CameraPreview.FLASH_MODE.ON;
+            } else {
+                $scope.flash_mode = CameraPreview.FLASH_MODE.OFF;
+            }
             // Set flash mode
             CameraPreview.setFlashMode($scope.flash_mode);
         };
@@ -55,5 +61,5 @@ app
     .controller('resultsPanelCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
 
         // Retrieve prediction that was passed from cameraPreview state
-        $scope.prediction = $stateParams.prediction;
+        $scope.results = $stateParams.results;
     }])
