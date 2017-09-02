@@ -1,16 +1,16 @@
 <div class="resultsPanel">
 
-    <!-- Card containing prediction -->
-    <div class="card">
-        <span>{{ results.input }}</span>
-    </div>
+    <!-- Plot destination -->
+    <img id="plot" ng-src="{{ results.plot }}">
 
-    <div class="card">
-        <span>{{ 'sin(' + results.input + ') = ' + results.sin }}</span>
-    </div>
+    <!-- Cards containing computation results -->
+    <div class="card"
+        ng-repeat="computation in results.computations">
 
-    <div class="card">
-        <span>{{  'cos(' + results.input + ') = ' + results.cos }}</span>
+        <span class="header">
+            {{ computation.name + ':' }}
+        </span>
+        <span class="body" mathjax="computation.result"></span>
     </div>
 
 </div>

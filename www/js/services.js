@@ -56,3 +56,114 @@ app
             );
         }
     }])
+    .service('plotService', ['$q', function($q) {
+        this.generate_plot2D = function(formula, ax_start, ax_range, step=0.1) {
+            var deferred = $q.defer();
+            // // Specify plot's destination element
+            // var dest = document.getElementById('plot');
+            // var data = [
+            //     {x: 0, y: 0},
+            //     {x: 1, y: 1},
+            //     {x: 2, y: 2},
+            //     {x: 3, y: 3},
+            //     {x: 4, y: 4},
+            //     {x: 5, y: 5},
+            // ];
+            //
+            // var options = {
+            //     drawPoints: false,
+            //     defaultGroup: 'ungrouped',
+            //     legend: false,
+            //     moveable: false,
+            //     showCurrentTime: false,
+            // };
+            //
+            // var dataset = new vis.DataSet(data);
+            // var graph2d = new vis.Graph2d(dest, dataset, options);
+            // functionPlot({
+            //     title: formula,
+            //     target: '#plot',
+            //     data: [{
+            //         fn: 'x^2',
+            //     }],
+            //     width: window.innerWidth,
+            //     disableZoom: true,
+            // })
+            // deferred.resolve();
+
+            // Fill axes with scalars
+            var x_axis = [];
+            var y_axis = [];
+            for (var i = ax_start; i < ax_start + ax_range; i+=step) {
+                var x = i;
+                x_axis.push(x);
+                y_axis.push(eval(formula));
+            }
+
+            // Specify plot properties
+            var graph = [{
+                x: x_axis,
+                y: y_axis,
+                mode: 'lines',
+                name: formula,
+                line: {
+                    color: 'rgb(55, 128, 191)',
+                    width: 1
+                }
+            }];
+            var layout = {
+                title: formula,
+            };
+            // Compile created graph
+            var plot_data = {
+                'graph': graph,
+                'layout': layout,
+            };
+            // Build the graph has been finished
+            deferred.resolve(plot_data);
+
+            return deferred.promise;
+        };
+
+        this.generate_plot3D = function(formula, ax_start, ax_range, step=0.1) {
+            var deferred = $q.defer();
+
+            // Fill axes with scalars
+            var x_axis = [];
+            var y_axis = [];
+            var z_axis = [];
+            for (var x = ax_start; x < ax_start + ax_range; x+=step) {
+                x_axis.push(x);
+                for(var y = ax_start; y < ax_start + ax_range; y+=step) {
+                    // Calculate y axis values for corresponding x
+                    y_axis.push(eval(formula));
+                }
+                z_axis.push(y_axis);
+                y_axis = [];
+            }
+
+            // Specify plot properties
+            var graph = [{
+                z: z_axis,
+                type: 'surface',
+            }];
+            var layout = {
+                title: formula,
+                margin: {
+                    l: 60,
+                    r: 60,
+                    b: 60,
+                    t: 60,
+                },
+            };
+            // Compile created graph
+            var plot_data = {
+                'graph': graph,
+                'layout': layout,
+            };
+            // Build the graph has been finished
+            deferred.resolve(plot_data);
+
+            return deferred.promise;
+        };
+    }])

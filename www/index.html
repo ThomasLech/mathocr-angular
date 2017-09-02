@@ -17,9 +17,15 @@
         <link rel="stylesheet" type="text/css" href="css/button.css">
         <!-- Card styles -->
         <link rel="stylesheet" type="text/css" href="css/cards.css">
+        <!-- Plot styles -->
+        <link rel="stylesheet" type="text/css" href="css/plot.css">
 
         <title>Mathocr AngularJS</title>
 
+        <!-- MathJax module for LaTeX rendering -->
+        <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
         <!-- AngularJS module -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
         <!-- AngularJS Ui-router -->
@@ -33,6 +39,9 @@
         <script type="text/javascript" src="js/controllers.js"></script>
         <!-- AngularJS config -->
         <script type="text/javascript" src="js/config.js"></script>
+        <!-- AngularJS directives -->
+        <script type="text/javascript" src="js/directives.js"></script>
+
     </head>
     <body>
         <ui-view></ui-view>
